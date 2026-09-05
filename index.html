@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — E-Learning &amp; Multimedia Developer</title>
+<meta name="description" content="Portfolio of an e-learning developer and graphic/multimedia designer.">
+
+<!-- Fonts: Fraunces (display, characterful serif) / Inter (body) / IBM Plex Mono (labels, tags, data) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!--
+  JSZip: the ONLY non-vanilla dependency in this project.
+  Compelling reason: reading a .zip file's contents and rewriting relative
+  asset paths to blob URLs is a binary-format + parsing problem, not
+  something CSS/plain DOM APIs solve. Everything else in this site is
+  vanilla HTML/CSS/JS.
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<!--
+  ARCHITECTURE NOTE (read me before editing):
+  - HTML (this file): structure only.
+  - css/style.css: all styling, using the CSS custom-property token system
+    at the top of the file (colors, type, spacing). Change a token once,
+    it updates everywhere.
+  - js/script.js: ALL editable CONTENT lives in the PORTFOLIO_DATA object
+    near the top of that file. Rendering functions read PORTFOLIO_DATA and
+    build the DOM — you should never need to touch a render function to
+    add a new experience card, skill, or portfolio project.
+  - assets/: one folder per project type (animate, indesign, illustrator,
+    photoshop, storyline360, rise360) plus images/ and resume/. Drop new
+    project files straight into the matching folder, then point the
+    relevant item in PORTFOLIO_DATA at it (zipUrl / src / embedUrl). No
+    structural change needed for new content.
+-->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER / NAV
+     Sections are listed once here AND once in PORTFOLIO_DATA.navLinks
+     is intentionally NOT duplicated — the nav reads its link list from
+     the same anchors already in the DOM (see buildNavFromSections in JS),
+     so adding a <section data-nav-label="..."> automatically adds a nav item.
+     ============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark" aria-hidden="true">◆</span>
+      <span class="logo-text">Portfolio</span>
+    </a>
+
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <!-- populated by JS from section data-nav-label attributes -->
+    </nav>
+
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <input type="search" id="siteSearch" placeholder="Search skills & projects…" aria-label="Search skills and projects">
+      <div class="search-results" id="searchResults" hidden></div>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="home" data-nav-label="Home" class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">E-Learning Developer · Graphic &amp; Multimedia Designer</p>
+      <h1 class="hero-name" data-placeholder="name">SINGAVARAPU GAUTHAM RAJU</h1>
+      <p class="hero-role" data-placeholder="designation">Instructional Designer &amp; Multimedia Developer</p>
+      <p class="hero-desc" data-placeholder="short-description">
+        Lead E-Learning Developer | Skilled in Developing Courses | Interactive eBook Developer | Inter active Digital Publishing developer | elearning content developer
+      </p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn btn-primary">View Portfolio <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#about" class="btn btn-ghost">About Me</a>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-frame">
+        <div class="hero-frame-sprockets"></div>
+        <div class="hero-image-placeholder">
+          <img src="assets/images/Gautham.jpg" alt="Profile Pic">
+          <!-- <i class="fa-solid fa-user"></i> -->
+          <!-- <span>Profile Image</span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" data-nav-label="About Me" class="about">
+  <div class="container about-inner">
+    <p class="eyebrow">About</p>
+    <h2 class="section-heading">Professional Profile</h2>
+    <div class="about-body" data-placeholder="resume-summary">
+      <<p>
+        Experienced eLearning Developer, Instructional Designer, and Interactive Digital Publishing Specialist with a strong background in creating engaging, learner-centric digital training solutions. Skilled in designing interactive courses using Articulate Storyline 360, Rise 360, Adobe Creative Suite, and developing rich, interactive eBooks for web and mobile platforms. Experienced in creating responsive digital publications with multimedia elements, animations, assessments, and accessibility-focused features to enhance learner engagement.
+       </p>
+       <p>
+        Adept at applying instructional design methodologies such as ADDIE to develop effective learning experiences that align with business goals. Proficient in developing SCORM/xAPI-compliant learning content, interactive eBooks, and HTML5-based digital publications while ensuring cross-platform compatibility and seamless user experiences. Proven ability to collaborate with SMEs, stakeholders, and cross-functional teams to deliver high-quality eLearning and digital publishing solutions on time. Possesses working knowledge of HTML, CSS, JavaScript, LMS integration, and quality assurance to create scalable and impactful learning experiences.
+      </p>
+    </div>
+    <a href="assets/resume/Gautham.pdf" class="btn btn-ghost about-resume-link" download>
+      <i class="fa-solid fa-file-arrow-down"></i> Download Resume
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPERIENCE
+     Cards are rendered by JS from PORTFOLIO_DATA.experience —
+     do not hand-add <article> cards here.
+     ============================================================ -->
+<section id="experience" data-nav-label="Experience" class="experience">
+  <div class="container">
+    <p class="eyebrow">Experience</p>
+    <h2 class="section-heading">Where I've worked</h2>
+    <div class="experience-grid" id="experienceGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TECHNICAL SKILLS — static categorized grid
+     Cards are rendered by JS from PORTFOLIO_DATA.skillCategories.
+     ============================================================ -->
+<section id="skills" data-nav-label="Technical Skills" class="skills">
+  <div class="container">
+    <p class="eyebrow">Technical Skills</p>
+    <h2 class="section-heading">Tools &amp; Skills</h2>
+    <p class="section-lede">My toolkit for eLearning, digital publishing, and interactive content.</p>
+    <div class="skills-grid" id="skillsGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PORTFOLIO
+     ============================================================ -->
+<section id="portfolio" data-nav-label="Portfolio" class="portfolio">
+  <div class="container">
+    <p class="eyebrow">Portfolio</p>
+    <h2 class="section-heading">Featured Projects</h2>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     mailto: form — no backend. Only the message field is required.
+
+     >>> This site's own email address (where messages are sent) is NOT
+     set here in the HTML. It lives in ONE place only:
+       File: js/script.js
+       Look for: "EDIT YOUR EMAIL ADDRESS HERE" (PORTFOLIO_DATA.contactInfo.recipientEmail)
+     Do not add an email address anywhere in this HTML file.
+     ============================================================ -->
+<section id="contact" data-nav-label="Contact Me" class="contact">
+  <div class="container">
+    <p class="eyebrow">Contact</p>
+    <h2 class="section-heading">Reach me @</h2>
+    <p class="section-lede">Let’s connect and turn ideas into engaging learning experiences.</p>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="contactName">Name<span class="required-mark" aria-hidden="true">*</span></label>
+          <input type="text" id="contactName" name="name" autocomplete="name" required>
+          <span class="form-error-text">Please enter your name.</span>
+        </div>
+        <div class="form-field">
+          <!-- This is the VISITOR's own email address, so you can reply to them —
+               not your address. Your address is set in js/script.js (see note above). -->
+          <label for="contactEmail">Email<span class="required-mark" aria-hidden="true">*</span></label>
+          <input type="email" id="contactEmail" name="email" autocomplete="email" required>
+          <span class="form-error-text">Please enter a valid email address.</span>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="contactSubject">Subject<span class="required-mark" aria-hidden="true">*</span></label>
+        <input type="text" id="contactSubject" name="subject" required>
+        <span class="form-error-text">Please enter a subject.</span>
+      </div>
+
+      <div class="form-field">
+        <label for="contactMessage">Message<span class="required-mark" aria-hidden="true">*</span></label>
+        <textarea id="contactMessage" name="message" required></textarea>
+        <span class="form-error-text">Please enter a message before sending.</span>
+      </div>
+
+      <div class="contact-submit-row">
+        <button type="submit" class="btn btn-primary">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+        <span class="form-status-text" id="contactStatus" aria-live="polite"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span>&copy; <span id="year"></span> — built with a modular HTML/CSS/JS structure, on purpose.</span>
+  </div>
+</footer>
+
+</main>
+
+<!-- ============================================================
+     SINGLE REUSABLE MODAL SHELL
+     Every popup in the site (experience detail, portfolio zip
+     viewer, image viewer, embed viewer) reuses this one element.
+     openModal(type, payload) fills #modalBody and shows it.
+     ============================================================ -->
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal-window" id="modalWindow" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-toolbar">
+      <h3 id="modalTitle" class="modal-title"></h3>
+      <div class="modal-toolbar-actions">
+        <button type="button" id="modalFullscreenBtn" class="modal-icon-btn" aria-label="Toggle fullscreen">
+          <i class="fa-solid fa-expand"></i>
+        </button>
+        <button type="button" id="modalCloseBtn" class="modal-icon-btn" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
