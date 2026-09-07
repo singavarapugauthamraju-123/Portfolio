@@ -470,6 +470,42 @@ function openPortfolioCategory(cat) {
   });
 }
 
+/* ----- Adding new comment content by chatGPT ------ */
+
+
+function renderProjectGrid(body, items) {
+  const grid = document.createElement("div");
+  grid.className = "thumb-grid";
+
+  items.forEach(item => {
+    const thumb = document.createElement("button");
+
+    thumb.type = "button";
+    thumb.className = "thumb";
+
+    const thumbInner = item.thumb
+      ? iconHTML(
+          item.thumb,
+          "fa-solid fa-play",
+          "thumb-image-img"
+        )
+      : `<i class="fa-solid fa-play"></i>`;
+
+    thumb.innerHTML = `
+      <span class="thumb-image">${thumbInner}</span>
+      <span class="thumb-label">${item.label}</span>
+    `;
+
+    thumb.addEventListener("click", () => openProject(item));
+
+    grid.appendChild(thumb);
+  });
+
+  body.appendChild(grid);
+}
+
+
+
 /* ---- ZIP category: thumbnails -> extract zip -> iframe ---- */
 function renderProjectGrid(body, items) {
   const grid = document.createElement("div");
