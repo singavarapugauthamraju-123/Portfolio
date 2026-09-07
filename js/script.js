@@ -159,7 +159,7 @@ performance support solutions in corporate environments.</li>
       label: "Adobe Animate",
       img: "assets/icons/skills/Animate_logo.webp",
       icon: "fa-brands fa-adobe",
-      type: "zip",
+      // type: "zip",
       desc: "Interactive HTML5 projects exported from Animate.",
       items: [
         { id: "an-1", label: "Zomato Banner", thumb: "assets/images/portfolio/Zomato.png", projectUrl: "animate/Zomato Banner/index.html"},
