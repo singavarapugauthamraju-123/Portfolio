@@ -162,7 +162,7 @@ performance support solutions in corporate environments.</li>
       type: "project",
       desc: "Interactive HTML5 projects exported from Animate.",
       items: [
-        { id: "an-1", label: "Zomato Banner", thumb: "assets/images/portfolio/Zomato.png", projectUrl: "/animate/Zomato Banner/index.html"},
+        { id: "an-1", label: "Zomato Banner", thumb: "assets/images/portfolio/Zomato.png", projectUrl: "https://singavarapugauthamraju-123.github.io/Portfolio/animate/Zomato Banner/index.html"},
         // { id: "an-2", label: "Sample Project 2", thumb: "assets/images/portfolio/Web Banner.png", zipUrl: "assets/animate/Web Banner 1200 x 400.zip" },
         // { id: "an-3", label: "Sample Project 3", thumb: "assets/images/portfolio/Healthy Restaurent.png", zipUrl: "assets/animateHealthy Restaurent 300 x 250.zip" },
         // { id: "an-4", label: "Sample Project 3", thumb: "assets/images/portfolio/Bank Guarantee.png", zipUrl: "assets/animate/Bank Guarantee 713 x 300.zip" },
