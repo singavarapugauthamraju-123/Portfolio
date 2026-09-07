@@ -463,7 +463,7 @@ function openPortfolioCategory(cat) {
     title: cat.label,
     size: "large",
     render: (body) => {
-      if (cat.type === "zip") renderZipGrid(body, cat.items);
+      if (cat.type === "zip") renderProjectGrid(body, cat.items);
       else if (cat.type === "image") renderImageGrid(body, cat.items);
       else if (cat.type === "embed") renderEmbedCategory(body, cat.subcategories);
     }
@@ -471,7 +471,7 @@ function openPortfolioCategory(cat) {
 }
 
 /* ---- ZIP category: thumbnails -> extract zip -> iframe ---- */
-function renderZipGrid(body, items) {
+function renderProjectGrid(body, items) {
   const grid = document.createElement("div");
   grid.className = "thumb-grid";
   items.forEach(item => {
@@ -485,13 +485,13 @@ function renderZipGrid(body, items) {
       <span class="thumb-image">${thumbInner}</span>
       <span class="thumb-label">${item.label}</span>
     `;
-    thumb.addEventListener("click", () => openZipProject(item));
+    thumb.addEventListener("click", () => openProject(item));
     grid.appendChild(thumb);
   });
   body.appendChild(grid);
 }
 
-async function openZipProject(item) {
+async function openProject(item) {
   const wrap = Modal.open({
     title: item.label,
     size: "large",
