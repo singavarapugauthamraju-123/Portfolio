@@ -506,6 +506,49 @@ function renderProjectGrid(body, items) {
 
 
 
+function openProject(item) {
+
+  Modal.open({
+    title: item.label,
+    size: "large",
+
+    render: (body) => {
+
+      if (!item.projectUrl) {
+
+        body.innerHTML = `
+          <div class="project-frame-status">
+            <i class="fa-solid fa-triangle-exclamation"
+               style="font-size:1.8rem;"></i>
+
+            <span>
+              Project URL is missing.
+            </span>
+          </div>
+        `;
+
+        return;
+      }
+
+      body.innerHTML = `
+        <div class="project-frame-wrap">
+
+          <iframe
+            src="${item.projectUrl}"
+            title="${item.label}"
+            allowfullscreen>
+          </iframe>
+
+        </div>
+      `;
+    }
+  });
+
+}
+
+
+
+
 /* ---- ZIP category: thumbnails -> extract zip -> iframe ---- */
 function renderProjectGrid(body, items) {
   const grid = document.createElement("div");
